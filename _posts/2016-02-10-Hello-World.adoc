@@ -1,4 +1,4 @@
-# Hello World!
+= Hello World!
 
 Weibo: *0xSuu*
 
@@ -8,4 +8,4 @@ print "s"
 
 asdasd
 
-[tag:Other]
+:hp-tags: Other
