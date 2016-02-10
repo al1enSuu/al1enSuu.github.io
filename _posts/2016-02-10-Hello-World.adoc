@@ -7,3 +7,5 @@ print "s"
 ```
 
 asdasd
+
+[tag:Other]
