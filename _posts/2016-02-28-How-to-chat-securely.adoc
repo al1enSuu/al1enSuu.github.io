@@ -7,6 +7,116 @@ With people who want to sniff your privacy all around you, with what method you 
 
 The answer is Public Key Encryption, or Asymmetric Encryption. If you image symmetric encryption as crafting a lock with one unique key. With asymmetric encryption, you hold two keys, one for encryption, one for decryption. The decryption key is the only key to open the lock crafted with the encryption key(encoding). So once your target person send you his encryption key, you could do nothing but encrypting your message with that key, so you did it, and you published the encrypted message and your target would be the only one that able to decrypt the message.
 
-Below is few lines of code make those encryption and decryption easier. If you are not on Mac, please uncomment last two lines because those are for copying encrypted message automatically with some apple script.
+Below is few lines of code make those encryption and decryption easier. If you are not on Mac, please uncomment last three lines because those are for copying encrypted message automatically with some apple script.
 
-```Python
+https://github.com/al1enSuu/RSAEnc/blob/master/rsa_tool.py
+
+```python
+#!/usr/bin/python
+
+import sys, getopt, os
+import rsa
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:], "hm:edg")
+except getopt.GetoptError:
+    print "rsa.py -m [message] -e(ncryption) -d(ecryption) -g(enerate key pair)"
+    sys.exit(-1)
+
+message = ""
+privkey = ""
+pubkey = ""
+
+mode = -1
+
+for opt, arg in opts:
+    if opt == "-h":
+        print "rsa.py -m [message] -e(ncryption) -d(ecryption) -g(enerate key pair)"
+        exit(0)
+    if opt == "-g":
+        print "Generating key pair"
+        (pubkey, privkey) = rsa.newkeys(1024)
+        privfile = open("priv", "w")
+        privfile.write(privkey.save_pkcs1("PEM"))
+        pubfile = open("pub", "w")
+        pubfile.write(pubkey.save_pkcs1("PEM"))
+        quit(0)
+
+    if opt == "-d":
+        with open('priv') as privatefile:
+            keydata = privatefile.read()
+        privkey = rsa.PrivateKey.load_pkcs1(keydata,"PEM")
+        print "Private key loaded"
+        mode = 100
+
+    if opt == "-e":
+        with open('pub') as pubfile:
+            keydata = pubfile.read()
+        pubkey = rsa.PublicKey.load_pkcs1(keydata,"PEM")
+        print "Public key loaded"
+        mode = 200
+
+    if opt == "-m":
+        message = arg
+
+if mode == 100:
+    if message=="":
+        while True:
+            print "Input:",
+            message=raw_input()
+            result = ""
+            j=0
+            for i in range(0,len(message),2):
+                result += chr(int("0x"+message[i]+message[i+1],16))
+            print "Decrypted:"
+            print rsa.decrypt(result, privkey)
+    else:
+        result = ""
+        j=0
+        for i in range(0,len(message),2):
+            result += chr(int("0x"+message[i]+message[i+1],16))
+        print "Decrypted:"
+        print rsa.decrypt(result, privkey)
+elif mode == 200:
+    if message=="":
+        while True:
+            print "Input:",
+            message=raw_input()
+            message = rsa.encrypt(message, pubkey)
+            retString = ""
+            for i in range(len(message)):
+                cha = str(hex(ord(message[i])))[2:]
+                if len(cha) == 1:
+                    cha = "0"+cha
+                retString += cha
+            print "Encrypted:"
+            print retString
+            cmd = "osascript -e \"set the clipboard to \\\""+retString+"\\\"\""
+            os.system(cmd)
+            print "Copied"
+    else:
+        message = rsa.encrypt(message, pubkey)
+        retString = ""
+        for i in range(len(message)):
+            cha = str(hex(ord(message[i])))[2:]
+            if len(cha) == 1:
+                cha = "0"+cha
+            retString += cha
+        print "Encrypted:"
+        print retString
+        cmd = "osascript -e \"set the clipboard to \\\""+retString+"\\\"\""
+        os.system(cmd)
+        print "Copied"
+        
+```
+
+
+Generating key pair first:
+```
+python rsa_tool.py -g
+```
+
+Copy your public key and send to your friend directly
+
+Either run the code with -d or -e will enter a loop to decrypt or encrypt messages continuously.
+
