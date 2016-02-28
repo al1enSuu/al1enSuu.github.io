@@ -5,4 +5,4 @@
 
 With people who want to sniff your privacy all around you, with what method you can keep message transferring safe, even you disclose your messages to public and only your target receiver can understand it? 
 
-The answer is Public Key Encryption, or Asymmetric Encryption. If you image symmetric encryption as crafting a lock with one unique key. With asymmetric encryption, you hold two keys, one for encryption, one for decryption. The decryption
+The answer is Public Key Encryption, or Asymmetric Encryption. If you image symmetric encryption as crafting a lock with one unique key. With asymmetric encryption, you hold two keys, one for encryption, one for decryption. The decryption key can onl
