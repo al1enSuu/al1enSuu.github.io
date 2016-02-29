@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>How to deliver message securely</title>
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to deliver message securely">
+    <meta name="twitter:description" content="">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How to deliver message securely">
+    <meta property="og:description" content="">
+
+    <!-- <meta name="twitter:site" content="">
+
+<meta name="twitter:creator" content="">
+
+<meta name="google-site-verification" content="">
+
+<meta property="fb:admins" content="">
+ -->
+
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon">
+
+    <link href="//fonts.googleapis.com/" rel="dns-prefetch">
+    <link href="//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic|Open+Sans:700,400&subset=latin,latin-ext" rel="stylesheet">
+
+    <link rel="stylesheet" href="//al1ensuu.github.io/themes/ghostium/assets/css/main.min.css?v=1.0.0"/>
+    <link rel="stylesheet" href="//al1ensuu.github.io/themes/ghostium/assets/css/custom.css?v=1.0.0"/>
+    <link rel="stylesheet" href="//al1ensuu.github.io/themes/ghostium/assets/css/asciidoctor-foundation.css?v=1.0.0"/>
+
+
+
+
+    <script type="text/javascript">
+      var ga_ua = 'UA-XXXXX-X';
+      
+      var disqus_shortname = 'example';
+      
+      var enable_pjax = true;
+
+      // Pace Options
+      // ==============
+      window.paceOptions = {
+        catchupTime: 100,
+        minTime: 100,
+        elements: false,
+        restartOnRequestAfter: 500,
+        startOnPageLoad: false
+      }
+
+      // Ghostium Globals
+      // ==============
+      window.GHOSTIUM = {};
+      GHOSTIUM.haveGA = typeof ga_ua !== 'undefined' && ga_ua !== 'UA-XXXXX-X';
+      GHOSTIUM.haveDisqus = typeof disqus_shortname !== 'undefined' && disqus_shortname !== 'example';
+      GHOSTIUM.enablePjax = typeof enable_pjax !== 'undefined' ? enable_pjax : true;
+    </script>
+
+    <script src="//al1ensuu.github.io/themes/ghostium/assets/js/head-scripts.min.js?v=1.0.0"></script>
+
+    <link rel="canonical" href="https://al1ensuu.github.io/2016/02/28/How-to-deliver-message-securely.html" />
+    
+    <meta property="og:site_name" content="0xSuu&#x27;s Blog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How to deliver message securely" />
+    <meta property="og:description" content="With people who want to sniff your privacy all around you, with what method you can keep message transferring safe, even you disclose your messages to public and only your target receiver can understand it? The answer is Public Key..." />
+    <meta property="og:url" content="https://al1ensuu.github.io/2016/02/28/How-to-deliver-message-securely.html" />
+    <meta property="article:published_time" content="2016-02-28T00:00:00.000Z" />
+    <meta property="article:modified_time" content="2016-02-29T00:47:56.369Z" />
+    <meta property="article:tag" content="RSA" />
+    <meta property="article:tag" content="Safety" />
+    <meta property="article:tag" content="Encryption" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="How to deliver message securely" />
+    <meta name="twitter:description" content="With people who want to sniff your privacy all around you, with what method you can keep message transferring safe, even you disclose your messages to public and only your target receiver can understand it? The answer is Public Key..." />
+    <meta name="twitter:url" content="https://al1ensuu.github.io/2016/02/28/How-to-deliver-message-securely.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "0xSuu&#x27;s Blog",
+    "author": {
+        "@type": "Person",
+        "name": "Suu",
+        "image": "https://avatars.githubusercontent.com/u/2240132?v=3",
+        "url": "undefined/author/undefined",
+        "sameAs": null
+    },
+    "headline": "How to deliver message securely",
+    "url": "https://al1ensuu.github.io/2016/02/28/How-to-deliver-message-securely.html",
+    "datePublished": "2016-02-28T00:00:00.000Z",
+    "dateModified": "2016-02-29T00:47:56.369Z",
+    "keywords": "RSA,  Safety,  Encryption",
+    "description": "With people who want to sniff your privacy all around you, with what method you can keep message transferring safe, even you disclose your messages to public and only your target receiver can understand it? The answer is Public Key..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="0xSuu&#x27;s Blog" href="https://al1ensuu.github.io/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+  </head>
+  <body class="post-template tag-R-S-A tag-Safety tag-Encryption">
+
+    <button data-action="open-drawer" id="drawer-button" class="drawer-button"><i class="fa fa-bars"></i></button>
+    <nav tabindex="-1" class="drawer">
+      <div class="drawer-container">
+        <!--.drawer-search(role="search")-->
+        <ul role="navigation" class="drawer-list">
+          
+          <li class="drawer-list-item">
+            <a href="https://al1ensuu.github.io" data-pjax>
+              <i class="fa fa-home"></i>Home
+            </a>
+          </li>
+          <!-- <li class="drawer-list-item">
+            <a href="https://al1ensuu.github.io" title="0xSuu&#x27;s Blog" data-pjax>
+              <i class="fa fa-list-alt"></i>All posts
+            </a>
+          </li> -->
+          <!--
+          <li class="drawer-list-item">
+            <a href="https://al1ensuu.github.io/rss/">
+              <i class="fa fa-rss"></i>Subscribe to Feed
+            </a>
+          </li>
+          -->
+          <li class="drawer-list-divider"></li>
+          <li class="drawer-list-item drawer-list-title">
+            Follow me
+          </li>
+          
+          
+          <li class="drawer-list-item">
+            <a href="0xsuu" title="Twitter" target="_blank">
+              <i class="fa fa-twitter"></i>Twitter
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="al1ensuu" title="Github" target="_blank">
+              <i class="fa fa-github"></i>Github
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="hs1145@york.ac.uk" title="LinkedIn" target="_blank">
+              <i class="fa fa-linkedin"></i>LinkedIn
+            </a>
+          </li>
+          <li class="drawer-list-item">
+            <a href="mailto:hs1145@york.ac.uk" title="Email" target="_blank">
+              <i class="fa fa-envelope-o"></i>Email
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="drawer-overlay"></div>
+    <main id="container" role="main" class="container">
+      <div class="surface">
+        <div class="surface-container">
+          <div data-pjax-container class="content">
+            
+<section class="wrapper wrapper-post">
+  <div class="wrapper-container">
+    <article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post post tag-R-S-A tag-Safety tag-Encryption">
+        <section class="post-container">
+          <header class="post-header">
+            <ul class="post-meta-list">
+              <li class="post-meta-item">
+                <time datetime="2016-02-28" itemprop="datePublished">
+                  2016-02-28 00:00:00<ago class="ago">
+                </time>
+              </li>
+                <li class="post-meta-item">
+                  <span class="tags"><i class="fa fa-tags"></i>
+                      <span>
+                      <a href="https://al1ensuu.github.io/tag/R-S-A">RSA</a>, <a href="https://al1ensuu.github.io/tag/Safety"> Safety</a>, <a href="https://al1ensuu.github.io/tag/Encryption"> Encryption</a></span>
+                  </span>
+                </li>
+              <li class="post-meta-item">
+                <a href="#disqus_thread" data-disqus-identifier="8251f904-fa61-4c50-9190-4fa2e183ccbf">Comments</a>
+              </li>
+            </ul>
+            <h1 itemprop="name headline" class="post-title"><a href="/2016/02/28/How-to-deliver-message-securely.html" itemprop="url" data-pjax title="How to deliver message securely">How to deliver message securely</a></h1>
+            <!--h2 itemprop="about" class="post-subtitle"></h2-->
+          </header>
+          <aside class="post-side">
+            <div class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img src="https://avatars.githubusercontent.com/u/2240132?v=3" alt="Suu">
+                </a>
+              <div class="post-author-info">
+                <a href="" class="post-author-name">
+                  Suu
+                </a>
+                <p class="post-author-bio"></p>
+              </div>
+            </div>
+          </aside>
+          <div itemprop="articleBody" class="post-body">
+            <div class="paragraph">
+<p>With people who want to sniff your privacy all around you, with what method you can keep message transferring safe, even you disclose your messages to public and only your target receiver can understand it?</p>
+</div>
+<div class="paragraph">
+<p>The answer is Public Key Encryption, or Asymmetric Encryption. If you image symmetric encryption as crafting a lock with one unique key. With asymmetric encryption, you hold two keys, one for encryption, one for decryption. The decryption key is the only key to open the lock crafted with the encryption key(encoding). So once your target person send you his encryption key, you could do nothing but encrypting your message with that key, so you did it, and you published the encrypted message and your target would be the only one that able to decrypt the message.</p>
+</div>
+<div class="paragraph">
+<p>Below is few lines of code make those encryption and decryption easier. If you are not on Mac, please uncomment last three lines because those are for copying encrypted message automatically with some apple script.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/al1enSuu/RSAEnc/blob/master/rsa_tool.py" class="bare">https://github.com/al1enSuu/RSAEnc/blob/master/rsa_tool.py</a></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">#!/usr/bin/python
+
+import sys, getopt, os
+import rsa
+
+try:
+    opts, args = getopt.getopt(sys.argv[1:], "hm:edg")
+except getopt.GetoptError:
+    print "rsa.py -m [message] -e(ncryption) -d(ecryption) -g(enerate key pair)"
+    sys.exit(-1)
+
+message = ""
+privkey = ""
+pubkey = ""
+
+mode = -1
+
+for opt, arg in opts:
+    if opt == "-h":
+        print "rsa.py -m [message] -e(ncryption) -d(ecryption) -g(enerate key pair)"
+        exit(0)
+    if opt == "-g":
+        print "Generating key pair"
+        (pubkey, privkey) = rsa.newkeys(1024)
+        privfile = open("priv", "w")
+        privfile.write(privkey.save_pkcs1("PEM"))
+        pubfile = open("pub", "w")
+        pubfile.write(pubkey.save_pkcs1("PEM"))
+        quit(0)
+
+    if opt == "-d":
+        with open('priv') as privatefile:
+            keydata = privatefile.read()
+        privkey = rsa.PrivateKey.load_pkcs1(keydata,"PEM")
+        print "Private key loaded"
+        mode = 100
+
+    if opt == "-e":
+        with open('pub') as pubfile:
+            keydata = pubfile.read()
+        pubkey = rsa.PublicKey.load_pkcs1(keydata,"PEM")
+        print "Public key loaded"
+        mode = 200
+
+    if opt == "-m":
+        message = arg
+
+if mode == 100:
+    if message=="":
+        while True:
+            print "Input:",
+            message=raw_input()
+            result = ""
+            j=0
+            for i in range(0,len(message),2):
+                result += chr(int("0x"+message[i]+message[i+1],16))
+            print "Decrypted:"
+            print rsa.decrypt(result, privkey)
+    else:
+        result = ""
+        j=0
+        for i in range(0,len(message),2):
+            result += chr(int("0x"+message[i]+message[i+1],16))
+        print "Decrypted:"
+        print rsa.decrypt(result, privkey)
+elif mode == 200:
+    if message=="":
+        while True:
+            print "Input:",
+            message=raw_input()
+            message = rsa.encrypt(message, pubkey)
+            retString = ""
+            for i in range(len(message)):
+                cha = str(hex(ord(message[i])))[2:]
+                if len(cha) == 1:
+                    cha = "0"+cha
+                retString += cha
+            print "Encrypted:"
+            print retString
+            cmd = "osascript -e \"set the clipboard to \\\""+retString+"\\\"\""
+            os.system(cmd)
+            print "Copied"
+    else:
+        message = rsa.encrypt(message, pubkey)
+        retString = ""
+        for i in range(len(message)):
+            cha = str(hex(ord(message[i])))[2:]
+            if len(cha) == 1:
+                cha = "0"+cha
+            retString += cha
+        print "Encrypted:"
+        print retString
+        cmd = "osascript -e \"set the clipboard to \\\""+retString+"\\\"\""
+        os.system(cmd)
+        print "Copied"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Generating key pair first:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>python rsa_tool.py -g</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Copy your public key and send to your friend directly</p>
+</div>
+<div class="paragraph">
+<p>Either run the code with -d or -e will enter a loop to decrypt or encrypt messages continuously.</p>
+</div>
+          </div>
+          <footer class="post-footer">
+            <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+                <a href="" class="post-author-avatar">
+                  <img itemprop="image" src="https://avatars.githubusercontent.com/u/2240132?v=3" alt="Suu">
+                </a>
+              <div class="post-author-info">
+                <h4 class="post-footer-heading">Written By</h4>
+                <a href="" itemprop="url" class="post-author-name">
+                  <span itemprop="name">Suu</span>
+                </a>
+                <p itemprop="description" class="post-author-bio"></p>
+                <p class="post-info">
+                  <b class="post-info-title">Published on</b>
+                  <time class="post-date">February 28, 2016</time>
+                </p>
+              </div>
+            </div>
+            <div class="post-social">
+              <h4 class="post-footer-heading">Spread the word</h4>
+              <a href="#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
+              <a href="#" data-action="share-facebook"><i class="fa fa-fw fa-lg fa-facebook"></i></a>
+              <a href="#" data-action="share-gplus"><i class="fa fa-fw fa-lg fa-google-plus"></i></a>
+            </div>
+          </footer>
+        </section>
+      <section itemprop="comment" class="post-comments">
+        <div id="disqus_thread"></div>
+      </section>
+    </article>
+
+    <footer role="contentinfo" class="footer">
+      <p><small>Copyright &copy; <span itemprop="copyrightHolder">0xSuu&#x27;s Blog</span>. 2016. All Rights Reserved.</small></p>
+      <p><small><a href="http://ghostium.oswaldoacauan.com/" target="_blank">Ghostium Theme</a> by <a href="http://twitter.com/oswaldoacauan" target="_blank">@oswaldoacauan</a></small></p>
+      <p><small>Adapted by <a href="https://twitter.com/mgreau">Maxime Gréau</a></small></p>
+      <p><small>Published with <a href="http://hubpress.io">HubPress</a></small></p>
+    </footer>
+  </div>
+</section>
+
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+
+    <script src="//al1ensuu.github.io/themes/ghostium/assets/js/foot-scripts.min.js?v=1.0.0"></script>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-73581714-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+  </body>
+</html>
