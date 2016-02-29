@@ -1,4 +1,4 @@
-= How to chat securely
+= How to deliver message securely
 
 :hp-tags: RSA, Safety, Encryption
 
